@@ -1,6 +1,9 @@
 # JDBC to BigQuery with Encryption using Google Tink and KMS
 This project demonstrates how to read data from JDBC and write it to BigQuery with encryption using Google Tink and KMS. It also provides an example of how to customize the encryption by specifying the PII columns.
 
+## Architecture
+![Architecture Diagram](architecture.png)
+
 ## Getting Started
 To get started with this project, follow these steps:
 
