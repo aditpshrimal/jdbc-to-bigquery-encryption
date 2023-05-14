@@ -17,7 +17,7 @@ public class KmsEncryption {
     public static Aead aead;
     public  static String aad;
 
-    public static void initializeOnce() throws GeneralSecurityException, IOException {
+    public static void initialize() throws GeneralSecurityException, IOException {
         AeadConfig.register();
         aad = "Using google tink for encryption";
 

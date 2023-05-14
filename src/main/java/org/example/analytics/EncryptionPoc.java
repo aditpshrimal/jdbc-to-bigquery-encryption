@@ -53,7 +53,7 @@ public class EncryptionPoc {
 
         @Setup
         public void initialize() throws GeneralSecurityException, IOException {
-            KmsEncryption.initializeOnce();
+            KmsEncryption.initialize();
         }
 
         @ProcessElement
