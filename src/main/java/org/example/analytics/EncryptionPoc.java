@@ -51,6 +51,11 @@ public class EncryptionPoc {
             this.joinKey = joinKey;
         }
 
+        @Setup
+        public void initialize() throws GeneralSecurityException, IOException {
+            KmsEncryption.initializeOnce();
+        }
+
         @ProcessElement
         public void processElement(ProcessContext c) throws GeneralSecurityException,
                 IOException {
@@ -78,7 +83,6 @@ public class EncryptionPoc {
         String[] outputTableNames = options.getOutputTable().get().split(",");
         String piiColumnNames = options.getPiiColumnNames().get();
         String joinKey = options.getJoinKey().get();
-        KmsEncryption.initializeOnce();
 
         PCollection<TableRow> inputData = pipeline.apply("Reading Database",
                 JdbcIO.<TableRow>read()

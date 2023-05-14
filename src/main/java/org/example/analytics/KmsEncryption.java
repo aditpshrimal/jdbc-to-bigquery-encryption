@@ -29,17 +29,14 @@ public class KmsEncryption {
         KeysetHandle keysetHandle = KeysetHandle.read(
                 JsonKeysetReader.withString(value),
                 new GcpKmsClient().withDefaultCredentials().getAead(masterKeyUri));
-        ByteArrayOutputStream symmetricKeyOutputStream = new ByteArrayOutputStream();
+      /*  ByteArrayOutputStream symmetricKeyOutputStream = new ByteArrayOutputStream();
         CleartextKeysetHandle.write(keysetHandle, BinaryKeysetWriter.withOutputStream(symmetricKeyOutputStream));
-//        System.out.println("Base64: "+ Base64.getEncoder().encodeToString(symmetricKeyOutputStream.toByteArray()));
+        System.out.println("Base64: "+ Base64.getEncoder().encodeToString(symmetricKeyOutputStream.toByteArray()));
+      */
         aead = keysetHandle.getPrimitive(Aead.class);
     }
 
     public static byte[] encrypt(String plainText) throws GeneralSecurityException, IOException {
-        if(aad==null){
-            initializeOnce();
-        }
-
         byte[] ciphertext = aead.encrypt(plainText.getBytes(StandardCharsets.UTF_8),aad.getBytes(StandardCharsets.UTF_8));
         return ciphertext;
     }
